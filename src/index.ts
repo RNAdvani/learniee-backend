@@ -1,7 +1,8 @@
 import express from "express";
 import { connectDb } from "./lib/db";
 import { setupSocket } from "./socket";
-import { createServer } from "http";
+import { createServer } from "https";
+
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { errorMiddleware } from "./lib/ErrorHandler";
@@ -15,7 +16,7 @@ const app = express();
 const http = createServer(app);
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], 
     credentials: true,
 }));
