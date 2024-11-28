@@ -56,6 +56,7 @@ export const setupSocket = (server: HTTPServer) => {
     // Handle typing events
     socket.on('typing', (data) => {
       const receiverSocketId = userSocketMap.get(data.receiver);
+      console.log('Typing:', data, receiverSocketId);
       if (receiverSocketId) {
         io.to(receiverSocketId).emit('user_typing', { userId: data.sender });
       }
@@ -82,7 +83,7 @@ export const setupSocket = (server: HTTPServer) => {
       if (userId) {
         userSocketMap.delete(userId);
 
-        await User.findByIdAndUpdate(userId, { isOnline: false });
+        await User.findByIdAndUpdate(userId, { isOnline: false,lastOnline: new Date(),updatedAt: new Date() });
 
         io.emit('user_status_change', { userId, isOnline: false });
         console.log('User disconnected:', userId, socket.id);

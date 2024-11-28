@@ -8,7 +8,10 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  isOnline: { type: Boolean, default: false }
+  isOnline: { type: Boolean, default: false },
+  createdAt : { type: Date, default: Date.now },
+  lastOnline : { type: Date },
+  updatedAt : { type: Date}
 }, { timestamps: true });
 
 userSchema.pre('save', async function(next) {
