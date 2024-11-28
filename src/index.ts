@@ -1,7 +1,7 @@
 import express from "express";
 import { connectDb } from "./lib/db";
 import { setupSocket } from "./socket";
-import { createServer } from "https";
+import { createServer } from "http";
 
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
